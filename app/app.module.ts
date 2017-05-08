@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule }    from '@angular/http';
 
 import { AppComponent }  from './app.component';
-import { Home }  from './components/home.component';
-import { Seriess }  from './components/series.component';
+import { HomeComponent }  from './components/home.component';
+import { SeriesComponent }  from './components/series.component';
 import { SeriesService }  from './services/series.service';
 
 @NgModule({
@@ -15,22 +15,17 @@ import { SeriesService }  from './services/series.service';
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component: Home
+        component: HomeComponent
       },
       {
         path: 'series',
-        component: Seriess
+        component: SeriesComponent
       }
     ])],
   declarations: [
                 AppComponent,
-                Home,
-                Seriess
+                HomeComponent,
+                SeriesComponent
                 ],
   bootstrap: [AppComponent],
   providers: [SeriesService]

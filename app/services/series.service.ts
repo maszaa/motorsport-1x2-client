@@ -6,22 +6,17 @@ import { Series }  from './../classes/series.class';
 
 @Injectable()
 export class SeriesService {
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private url: String = 'http://127.0.0.1:8000/api/series/?format=json';
+
   constructor(private http: Http) { }
 
   getSeries(): Promise<Series[]> {
-    return this.http.get('http://127.0.0.1:8000/api/series/?format=json')
+    return this.http.get(this.url)
                .toPromise()
-               .then(this.handleData)
+               .then(response => response.json() as Series[])
                .catch(this.handleError);
   }
-  private handleData(data: any): Promise<Series[]> {
-    let series = new Array();
-    Array.of(data.json()).forEach(function(serie) {
-      series.push(new Series(serie[0].name));
-    });
-    return Promise.resolve(series);
-  }
+  
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

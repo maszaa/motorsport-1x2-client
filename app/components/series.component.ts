@@ -9,7 +9,7 @@ import { SeriesService }  from './../services/series.service';
   providers: [SeriesService]
 })
 
-export class Seriess implements OnInit {
+export class SeriesComponent implements OnInit {
   title = 'Series';
   series: Series[];
 
