@@ -14,6 +14,7 @@ export class SeriesComponent implements OnInit {
   series: Series[];
 
   constructor(private seriesService: SeriesService) { }
+  
   getSeries(): void {
     this.seriesService.getSeries().then(series => this.series = series);
   }
