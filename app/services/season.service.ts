@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response }    from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Seasons }  from './../classes/season.class';
+import { Season }  from './../classes/season.class';
 
 @Injectable()
 export class SeasonService {
