@@ -4,7 +4,19 @@
   <h2>{{season.series}}</h2>
   <h3>{{season.year}}</h3>
 
-  <div class="button button-toolbar">
-    <a class="btn btn-success" routerLink="/season/{{season.id}}/rounds/add">Add new round</a>
-  </div>
+  <p>
+    <label>Round number:</label>
+  </p>
+  <p>
+    <input type="number" #round />
+  </p>
+  <p>
+    <button class="btn btn-success" (click)="addRound(round.value, season.year, season.series); round.value=''">Add new round</button>
+  </p>
+
+  <ul class="rounds">
+    <li *ngFor="let round of season.rounds">
+      {{round}}
+    </li>
+  </ul>
 </div>

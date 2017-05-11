@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'series', component: SeriesComponent },
   { path: 'seasons', component: SeasonComponent },
   { path: 'season/:id', component: SeasonDetailComponent},
+  { path: 'season/:id/rounds/add', component: SeasonDetailComponent},
   { path: 'competition/:id', component: CompetitionDetailComponent },
   { path: 'competitions', component: CompetitionComponent },
   { path: 'players', component: PlayerComponent},

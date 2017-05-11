@@ -20,6 +20,14 @@ export class SeasonDetailComponent implements OnInit {
     this.seasonService.getSeason(id).then(season => this.season = season);
   }
 
+  addRound(roundNumber: number, season: number, series: string): void {
+    if (!roundNumber || !season || !series) {
+      return;
+    }
+    this.seasonService.addRound(roundNumber, season, series)
+                      .then(round => this.season.rounds.push(`${round.roundNumber}. ${round.roundName}`));
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
         this.getSeason(+params['id']);

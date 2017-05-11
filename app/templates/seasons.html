@@ -10,7 +10,7 @@
   <tbody *ngFor="let season of seasons">
     <tr>
       <td>{{season.series}}</td>
-      <td>{{season.year}}</td>
+      <td><a routerLink="/season/{{season.id}}">{{season.year}}</a></td>
     </tr>
   </tbody>
 </table>
