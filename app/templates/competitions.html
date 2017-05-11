@@ -4,13 +4,15 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Series</th>
       <th>Year</th>
     </tr>
   </thead>
   <tbody *ngFor="let competition of competitions">
     <tr>
-      <td>{{competition.name}}</td>
-      <td>{{competition.seasonId}}</td>
+      <td><a routerLink="/competition/{{competition.id}}">{{competition.name}}</a></td>
+      <td>{{competition.season.series}}</td>
+      <td>{{competition.season.year}}</td>
     </tr>
   </tbody>
 </table>

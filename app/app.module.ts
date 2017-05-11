@@ -10,7 +10,10 @@ import { SeriesService }  from './services/series.service';
 import { SeasonComponent }  from './components/season.component';
 import { SeasonService }  from './services/season.service';
 import { CompetitionComponent }  from './components/competition.component';
+import { CompetitionDetailComponent }  from './components/competition-detail.component';
 import { CompetitionService }  from './services/competition.service';
+import { PlayerComponent }  from './components/player.component';
+import { PlayerService }  from './services/player.service';
 
 
 @NgModule({
@@ -31,8 +34,16 @@ import { CompetitionService }  from './services/competition.service';
         component: SeasonComponent
       },
       {
+        path: 'competition/:id',
+        component: CompetitionDetailComponent
+      },
+      {
         path: 'competitions',
         component: CompetitionComponent
+      },
+      {
+        path: 'players',
+        component: PlayerComponent
       },
     ])],
   declarations: [
@@ -41,12 +52,15 @@ import { CompetitionService }  from './services/competition.service';
     SeriesComponent,
     SeasonComponent,
     CompetitionComponent,
+    CompetitionDetailComponent,
+    PlayerComponent,
   ],
   bootstrap: [AppComponent],
   providers: [
     SeriesService,
     SeasonService,
     CompetitionService,
+    PlayerService,
   ]
 })
 export class AppModule {}

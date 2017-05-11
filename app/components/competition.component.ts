@@ -11,7 +11,7 @@ import { CompetitionService }  from './../services/competition.service';
 
 export class CompetitionComponent implements OnInit {
   title = 'Competitions';
-  series: Competition[];
+  competitions: Competition[];
 
   constructor(private competitionService: CompetitionService) { }
 

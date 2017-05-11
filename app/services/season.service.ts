@@ -6,7 +6,7 @@ import { Seasons }  from './../classes/season.class';
 
 @Injectable()
 export class SeasonService {
-  private url: string = 'http://127.0.0.1:8000/api/seasons/?format=json';
+  private url: string = 'http://127.0.0.1:8000/api/seasons/';
 
   constructor(private http: Http) { }
 
@@ -18,7 +18,7 @@ export class SeasonService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }

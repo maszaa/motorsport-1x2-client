@@ -11,7 +11,7 @@ import { SeasonService }  from './../services/season.service';
 
 export class SeasonComponent implements OnInit {
   title = 'Seasons';
-  series: Season[];
+  seasons: Season[];
 
   constructor(private seasonService: SeasonService) { }
 

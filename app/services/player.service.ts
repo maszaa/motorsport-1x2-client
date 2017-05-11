@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response }    from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { Series }  from './../classes/series.class';
+import { Player }  from './../classes/player.class';
 
 @Injectable()
-export class SeriesService {
-  private url: string = 'http://127.0.0.1:8000/api/series/';
+export class PlayerService {
+  private url: string = 'http://127.0.0.1:8000/api/players/';
 
   constructor(private http: Http) { }
 
-  getSeries(): Promise<Series[]> {
-    return this.http.get(this.url)
+  getPlayers(competitionId: number): Promise<Player[]> {
+    return this.http.get(`${this.url}?competitionId=${competitionId}`)
                .toPromise()
-               .then(response => response.json() as Series[])
+               .then(response => response.json() as Player[])
                .catch(this.handleError);
   }
 

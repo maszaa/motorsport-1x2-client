@@ -1,6 +1,8 @@
+import { Season }  from './season.class';
+
 export class Competition {
   id: number;
   players: string[];
-  seasonId: number;
+  season: Season;
   name: string;
 }
