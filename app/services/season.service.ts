@@ -17,6 +17,13 @@ export class SeasonService {
                .catch(this.handleError);
   }
 
+  getSeason(id: number): Promise<Season> {
+    return this.http.get(`${this.url}${id}`)
+              .toPromise()
+              .then(response => response.json() as Season)
+              .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);

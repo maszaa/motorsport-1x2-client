@@ -9,6 +9,7 @@ import { HomeComponent }  from './components/home.component';
 import { SeriesComponent }  from './components/series.component';
 import { SeriesService }  from './services/series.service';
 import { SeasonComponent }  from './components/season.component';
+import { SeasonDetailComponent }  from './components/season-detail.component';
 import { SeasonService }  from './services/season.service';
 import { CompetitionComponent }  from './components/competition.component';
 import { CompetitionDetailComponent }  from './components/competition-detail.component';
@@ -28,6 +29,7 @@ import { PlayerService }  from './services/player.service';
     HomeComponent,
     SeriesComponent,
     SeasonComponent,
+    SeasonDetailComponent,
     CompetitionComponent,
     CompetitionDetailComponent,
     PlayerComponent,

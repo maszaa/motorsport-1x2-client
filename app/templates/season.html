@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+
+<div *ngIf="season">
+  <h2>{{season.series}}</h2>
+  <h3>{{season.year}}</h3>
+
+  <div class="button button-toolbar">
+    <a class="btn btn-success" routerLink="/season/{{season.id}}/rounds/add">Add new round</a>
+  </div>
+</div>
