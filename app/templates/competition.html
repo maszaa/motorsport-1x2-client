@@ -4,8 +4,21 @@
   <h2>{{competition.name}}</h2>
   <h3>{{competition.season.year}}</h3>
 
+  <h3>Add new player</h3>
+  <p>
+    <label>Player name:</label>
+  </p>
+  <p>
+    <input type="text" #player />
+  </p>
+  <p>
+    <button class="btn btn-success" (click)="addPlayer(player.value, competition.id); player.value=''">Add new player</button>
+  </p>
+  <p *ngIf="newPlayer">
+    {{newPlayer.name}} was added!
+  </p>
+
   <div class="button button-toolbar">
-    <a class="btn btn-success" routerLink="/players/add">Add new player</a>
     <a class="btn btn-success" routerLink="/players/rows/add">Add new player row</a>
     <a class="btn btn-info" [routerLink]="['/players']" [queryParams]="{competitionId: competition.id}">Players</a>
     <a class="btn btn-info" [routerLink]="['/rounds']" [queryParams]="{competitionId: competition.id}">Rounds</a>
