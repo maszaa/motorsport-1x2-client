@@ -8,16 +8,19 @@ import { SeasonDetailComponent }  from './components/season-detail.component';
 import { CompetitionComponent }  from './components/competition.component';
 import { CompetitionDetailComponent }  from './components/competition-detail.component';
 import { PlayerComponent }  from './components/player.component';
+import { RoundComponent }  from './components/round.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'series', component: SeriesComponent },
   { path: 'seasons', component: SeasonComponent },
   { path: 'season/:id', component: SeasonDetailComponent},
-  { path: 'season/:id/rounds/add', component: SeasonDetailComponent},
+  { path: 'competition/:competitionId/season/:seasonId/rounds', component: RoundComponent},
+  //{ path: 'competition/:competitionId/season/:seasonId/round/:roundId', component: RoundDetailComponent},
   { path: 'competition/:id', component: CompetitionDetailComponent },
   { path: 'competitions', component: CompetitionComponent },
-  { path: 'players', component: PlayerComponent},
+  { path: 'competition/:id/players', component: PlayerComponent},
 ];
 
 @NgModule({

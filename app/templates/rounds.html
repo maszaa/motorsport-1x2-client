@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul class="rounds">
+  <li *ngFor="let round of rounds">
+      <span class="badge">{{round.roundNumber}}</span> <a routerLink="/competition/{{competitionId}}/season/{{round.season}}/round/{{round.id}}">{{round.roundName}}</a>
+  </li>
+</ul>

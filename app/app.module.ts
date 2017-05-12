@@ -16,6 +16,7 @@ import { CompetitionDetailComponent }  from './components/competition-detail.com
 import { CompetitionService }  from './services/competition.service';
 import { PlayerComponent }  from './components/player.component';
 import { PlayerService }  from './services/player.service';
+import { RoundComponent }  from './components/round.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { PlayerService }  from './services/player.service';
     CompetitionComponent,
     CompetitionDetailComponent,
     PlayerComponent,
+    RoundComponent,
   ],
   bootstrap: [AppComponent],
 })

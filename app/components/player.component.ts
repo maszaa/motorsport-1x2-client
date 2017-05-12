@@ -21,8 +21,8 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-        this.getPlayers(+params['competitionId']);
+    this.route.params.subscribe((params: Params) => {
+        this.getPlayers(+params['id']);
       });
   }
 }

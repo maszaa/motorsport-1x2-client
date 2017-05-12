@@ -35,6 +35,13 @@ export class SeasonService {
                .catch(this.handleError);
   }
 
+  getRounds(season: number): Promise<Round[]> {
+    return this.http.get(`${this.roundUrl}?seasonId=${season}`)
+                    .toPromise()
+                    .then(response => response.json() as Round[])
+                    .catch(this.handleError)
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
