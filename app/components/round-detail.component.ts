@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Player }  from './../classes/player.class';
 import { PlayerRow }  from './../classes/player-row.class';
+import { PlayerHelper }  from './../classes/player-helper.class';
 import { PlayerService }  from './../services/player.service';
 import { Round }  from './../classes/round.class';
 import { SeasonService }  from './../services/season.service';
@@ -10,7 +11,7 @@ import { SeasonService }  from './../services/season.service';
 @Component({
   selector: 'round',
   templateUrl: './../templates/round.html',
-  providers: [PlayerService, SeasonService]
+  providers: [PlayerService, SeasonService, PlayerHelper]
 })
 
 export class RoundDetailComponent implements OnInit {
@@ -20,7 +21,8 @@ export class RoundDetailComponent implements OnInit {
   roundPlayers: Player[];
   playerRows: PlayerRow[];
 
-  constructor(private playerService: PlayerService,
+  constructor(private playerHelper: PlayerHelper,
+              private playerService: PlayerService,
               private seasonService: SeasonService,
               private route:ActivatedRoute) { }
 
@@ -37,70 +39,10 @@ export class RoundDetailComponent implements OnInit {
     }
     this.playerService.getPlayerRows(competitionId, roundId)
                       .then(playerRows => {
+                        this.players = players;
                         this.playerRows = playerRows;
-                        let roundPlayers: Player[] = new Array();
-                        for (let playerRow of this.playerRows) {
-                          let player = roundPlayers.find(player => player.id === playerRow.player)
-                          if (!player) {
-                            let player = players.find(player => player.id === playerRow.player);
-                            if (playerRow.rowType == 'Qualifying') {
-                              let roundPlayer: Player = {
-                                id: player.id,
-                                name: player.name,
-                                points: playerRow.pointsFromRow,
-                                qualifyingPoints: playerRow.pointsFromRow,
-                                racePoints: 0,
-                                competitionId: playerRow.competition,
-                                rows: new Array()};
-                              roundPlayers.push(roundPlayer);
-                            }
-                            else if (playerRow.rowType == 'Race') {
-                              let roundPlayer: Player = {
-                                id: player.id,
-                                name: player.name,
-                                points: playerRow.pointsFromRow,
-                                qualifyingPoints: 0,
-                                racePoints: playerRow.pointsFromRow,
-                                competitionId: playerRow.competition,
-                                rows: new Array()};
-                              roundPlayers.push(roundPlayer);
-                            }
-                          }
-                          else {
-                            player.points += playerRow.pointsFromRow;
-                            if (playerRow.rowType == 'Qualifying') {
-                              player.qualifyingPoints = playerRow.pointsFromRow;
-                            }
-                            else if (playerRow.rowType == 'Race') {
-                              player.racePoints = playerRow.pointsFromRow;
-                            }
-                          }
-
-                        }
-                        this.roundPlayers = roundPlayers.sort((a, b) => {
-                          if (a.points > b.points) {
-                            return -1;
-                          }
-                          else if (a.points < b.points) {
-                            return 1;
-                          }
-                          else {
-                            if (a.racePoints > b.racePoints) {
-                              return -1;
-                            }
-                            else if (a.racePoints < b.racePoints) {
-                              return 1;
-                            }
-                            else {
-                              if (a.name > b.name) {
-                                return 1;
-                              }
-                              else if (a.name < b.name) {
-                                return -1;
-                              }
-                            }
-                          }
-                        });
+                        this.playerHelper.orderPlayers(players, playerRows)
+                                         .then(roundPlayers => this.roundPlayers = roundPlayers);
                       });
   }
 

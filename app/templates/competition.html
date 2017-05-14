@@ -47,7 +47,7 @@
   </p>
 
   <p>
-    <button class="btn btn-success" (click)="addPlayerRow(competition.id, player.value, round.value, rowType.value, row.value); row.value=''">Add new player</button>
+    <button class="btn btn-success" (click)="addPlayerRow(competition.id, player.value, round.value, rowType.value, row.value); row.value=''">Add new player row</button>
   </p>
 
   <p *ngIf="newPlayerRow">
@@ -56,7 +56,6 @@
   </p>
 
   <div class="button button-toolbar">
-    <a class="btn btn-success" routerLink="/players/rows/add">Add new player row</a>
     <a class="btn btn-info" routerLink="/competition/{{competition.id}}/players">Players</a>
     <a class="btn btn-info" routerLink="/competition/{{competition.id}}/season/{{competition.season.id}}/rounds">Rounds</a>
   </div>
