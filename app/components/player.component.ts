@@ -17,6 +17,9 @@ export class PlayerComponent implements OnInit {
   constructor(private playerService: PlayerService, private route:ActivatedRoute) { }
 
   getPlayers(competitionId: number): void {
+    if (!competitionId) {
+        return;
+    }
     this.playerService.getPlayers(competitionId).then(players => this.players = players);
   }
 

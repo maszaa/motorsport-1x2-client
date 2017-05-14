@@ -9,13 +9,50 @@
     <label>Player name:</label>
   </p>
   <p>
-    <input type="text" #player />
+    <input type="text" #newPlayerName />
   </p>
   <p>
-    <button class="btn btn-success" (click)="addPlayer(player.value, competition.id); player.value=''">Add new player</button>
+    <button class="btn btn-success" (click)="addPlayer(newPlayerName.value, competition.id); newPlayerName.value=''">Add new player</button>
   </p>
   <p *ngIf="newPlayer">
     {{newPlayer.name}} was added!
+  </p>
+
+  <h3>Add new player row</h3>
+  <p>
+    <label>Player: </label>
+    <select #player>
+      <option *ngFor="let player of players" value={{player.id}}> {{player.name}}
+    </select>
+  </p>
+
+  <p>
+    <label>Round: </label>
+    <select #round>
+      <option *ngFor="let round of rounds" value={{round.id}}> {{round.roundNumber}}. {{round.roundName}}
+    </select>
+  </p>
+
+  <p>
+    <label>Row type: </label>
+    <select #rowType>
+      <option value="Qualifying"> Qualifying
+      <option value="Race"> Race
+    </select>
+  </p>
+
+  <p>
+    <label>Row:</label>
+    <input type="text" #row />
+  </p>
+
+  <p>
+    <button class="btn btn-success" (click)="addPlayerRow(competition.id, player.value, round.value, rowType.value, row.value); row.value=''">Add new player</button>
+  </p>
+
+  <p *ngIf="newPlayerRow">
+    New player row was added:<br>
+    PlayerID: {{newPlayerRow.player}}, CompetitionID: {{newPlayerRow.competition}}, RoundID: {{newPlayerRow.round}}, Rowtype: {{newPlayerRow.rowType}}, Row: {{newPlayerRow.row}}
   </p>
 
   <div class="button button-toolbar">

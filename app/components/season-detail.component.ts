@@ -17,6 +17,9 @@ export class SeasonDetailComponent implements OnInit {
   constructor(private seasonService: SeasonService, private route:ActivatedRoute) { }
 
   getSeason(id: number): void {
+    if (!id) {
+      return;
+    }
     this.seasonService.getSeason(id).then(season => this.season = season);
   }
 
