@@ -36,7 +36,7 @@ export class PlayerService {
                .catch(this.handleError);
   }
 
-  addPlayerRow(competitionId: number, playerId: string, roundId: number, rowType: string, row: string): Promise<PlayerRow[]> {
+  addPlayerRow(competitionId: number, playerId: string, roundId: number, rowType: string, row: string): Promise<PlayerRow> {
     return this.http
                .post(this.playerRowUrl, JSON.stringify({player: playerId, competition: competitionId, round: roundId, rowType: rowType, row: row}), {headers: this.headers})
                .toPromise()

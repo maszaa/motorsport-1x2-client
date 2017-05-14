@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Player }  from './../classes/player.class';
-import { PlayerRow }  from './../classes/player.class';
+import { PlayerRow }  from './../classes/player-row.class';
 import { PlayerService }  from './../services/player.service';
+import { Round }  from './../classes/round.class';
 import { SeasonService }  from './../services/season.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class RoundDetailComponent implements OnInit {
   title = 'Round';
   round: Round;
   players: Player[];
-  roundPlayers: Player[] = new Array();
+  roundPlayers: Player[];
+  playerRows: PlayerRow[];
 
   constructor(private playerService: PlayerService,
               private seasonService: SeasonService,
@@ -29,25 +31,15 @@ export class RoundDetailComponent implements OnInit {
     this.seasonService.getRound(roundId).then(round => this.round = round);
   }
 
-  getPlayers(competitionId: number, roundId: number): void {
-    if (!competitionId || !roundId) {
-        return;
-    }
-    this.playerService.getPlayers(competitionId, roundId)
-                      .then(players => {
-                        this.players = players;
-                        this.getPlayerRows(competitionId, roundId, players);
-                      });
-  }
-
   getPlayerRows(competitionId: number, roundId: number, players: Player[]): void {
     if (!competitionId || !roundId || !players) {
       return;
     }
     this.playerService.getPlayerRows(competitionId, roundId)
                       .then(playerRows => {
-                        let roundPlayers = new Array();
-                        for (let playerRow of playerRows) {
+                        this.playerRows = playerRows;
+                        let roundPlayers: Player[] = new Array();
+                        for (let playerRow of this.playerRows) {
                           let player = roundPlayers.find(player => player.id === playerRow.player)
                           if (!player) {
                             let player = players.find(player => player.id === playerRow.player);
@@ -58,7 +50,8 @@ export class RoundDetailComponent implements OnInit {
                                 points: playerRow.pointsFromRow,
                                 qualifyingPoints: playerRow.pointsFromRow,
                                 racePoints: 0,
-                                competitionId: playerRow.competition};
+                                competitionId: playerRow.competition,
+                                rows: new Array()};
                               roundPlayers.push(roundPlayer);
                             }
                             else if (playerRow.rowType == 'Race') {
@@ -68,7 +61,8 @@ export class RoundDetailComponent implements OnInit {
                                 points: playerRow.pointsFromRow,
                                 qualifyingPoints: 0,
                                 racePoints: playerRow.pointsFromRow,
-                                competitionId: playerRow.competition};
+                                competitionId: playerRow.competition,
+                                rows: new Array()};
                               roundPlayers.push(roundPlayer);
                             }
                           }
@@ -109,6 +103,18 @@ export class RoundDetailComponent implements OnInit {
                         });
                       });
   }
+
+  getPlayers(competitionId: number, roundId: number): void {
+    if (!competitionId || !roundId) {
+        return;
+    }
+    this.playerService.getPlayers(competitionId)
+                      .then(players => {
+                        this.players = players;
+                        this.getPlayerRows(competitionId, roundId, this.players);
+                      });
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
         this.getPlayers(+params['competitionId'], +params['roundId']);

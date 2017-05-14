@@ -5,6 +5,7 @@ import { Competition }  from './../classes/competition.class';
 import { CompetitionService }  from './../services/competition.service';
 import { Player }  from './../classes/player.class';
 import { PlayerService }  from './../services/player.service';
+import { PlayerRow }  from './../classes/player-row.class';
 import { Round }  from './../classes/round.class';
 import { SeasonService }  from './../services/season.service';
 
