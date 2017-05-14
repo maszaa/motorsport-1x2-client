@@ -8,7 +8,8 @@ import { Round }  from './../classes/round.class';
 @Injectable()
 export class SeasonService {
   private seasonUrl: string = 'http://127.0.0.1:8000/api/seasons/';
-  private roundUrl: string = 'http://127.0.0.1:8000/api/season/rounds/';
+  private roundsUrl: string = 'http://127.0.0.1:8000/api/season/rounds/';
+  private roundUrl: string = 'http://127.0.0.1:8000/api/season/round/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
@@ -29,14 +30,21 @@ export class SeasonService {
 
   addRound(roundNumber: number, season: number, series: string): Promise<Round> {
     return this.http
-               .post(this.roundUrl, JSON.stringify({round: roundNumber, season: season, series: series}), {headers: this.headers})
+               .post(this.roundsUrl, JSON.stringify({round: roundNumber, season: season, series: series}), {headers: this.headers})
                .toPromise()
                .then(response => response.json() as Round)
                .catch(this.handleError);
   }
 
+  getRound(round: number): Promise<Round> {
+    return this.http.get(`${this.roundUrl}${round}/`)
+                    .toPromise()
+                    .then(response => response.json() as Round)
+                    .catch(this.handleError)
+  }
+
   getRounds(season: number): Promise<Round[]> {
-    return this.http.get(`${this.roundUrl}?seasonId=${season}`)
+    return this.http.get(`${this.roundsUrl}?seasonId=${season}`)
                     .toPromise()
                     .then(response => response.json() as Round[])
                     .catch(this.handleError)

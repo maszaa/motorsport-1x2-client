@@ -9,6 +9,7 @@ import { PlayerRow }  from './../classes/player-row.class';
 export class PlayerService {
   private playerUrl: string = 'http://127.0.0.1:8000/api/players/';
   private playerRowUrl: string = 'http://127.0.0.1:8000/api/player/row/';
+  private playerRowsUrl: string = 'http://127.0.0.1:8000/api/players/rows/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
@@ -17,6 +18,13 @@ export class PlayerService {
     return this.http.get(`${this.playerUrl}?competitionId=${competitionId}`)
                .toPromise()
                .then(response => response.json() as Player[])
+               .catch(this.handleError);
+  }
+
+  getPlayerRows(competitionId: number, roundId: number): Promise<PlayerRow[]> {
+    return this.http.get(`${this.playerRowsUrl}?competitionId=${competitionId}&roundId=${roundId}`)
+               .toPromise()
+               .then(response => response.json() as PlayerRow[])
                .catch(this.handleError);
   }
 

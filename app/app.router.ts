@@ -9,6 +9,7 @@ import { CompetitionComponent }  from './components/competition.component';
 import { CompetitionDetailComponent }  from './components/competition-detail.component';
 import { PlayerComponent }  from './components/player.component';
 import { RoundComponent }  from './components/round.component';
+import { RoundDetailComponent }  from './components/round-detail.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'seasons', component: SeasonComponent },
   { path: 'season/:id', component: SeasonDetailComponent},
   { path: 'competition/:competitionId/season/:seasonId/rounds', component: RoundComponent},
-  //{ path: 'competition/:competitionId/season/:seasonId/round/:roundId', component: RoundDetailComponent},
+  { path: 'competition/:competitionId/season/:seasonId/round/:roundId', component: RoundDetailComponent},
   { path: 'competition/:id', component: CompetitionDetailComponent },
   { path: 'competitions', component: CompetitionComponent },
   { path: 'competition/:id/players', component: PlayerComponent},

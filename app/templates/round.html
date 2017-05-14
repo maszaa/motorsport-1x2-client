@@ -1,0 +1,24 @@
+<h1>{{title}}</h1>
+
+<div *ngIf="round">
+  <h3>{{round.roundNumber}}. {{round.roundName}}</h3>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Points from Qualifyings</th>
+      <th>Points from Races</th>
+      <th>Total Points</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let roundPlayer of roundPlayers">
+    <tr>
+      <td>{{roundPlayer.name}}</td>
+      <td>{{roundPlayer.qualifyingPoints}}</td>
+      <td>{{roundPlayer.racePoints}}</td>
+      <td>{{roundPlayer.points}}</td>
+    </tr>
+  </tbody>
+</table>
